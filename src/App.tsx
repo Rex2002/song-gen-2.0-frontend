@@ -1,17 +1,11 @@
-import { Button, Checkbox, Slider } from '@mui/material';
-import React, { ChangeEvent, useState } from 'react';
-import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import CreateSong from './components/createSong';
 import Header from './components/header';
+import Error from './components/error'
+import ViewSongs from './components/viewSong';
 
-function TestID (){
-  let { id } = useParams()
-  console.log("testID called")
-  return (
-    <div> ID: {id}</div>
-  )
-}
 
 function App() {
 
@@ -20,9 +14,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Header/>}>
         <Route path="viewSong">
-          <Route path=":id" element={<TestID/>}/>
+          <Route path=":id" element={<ViewSongs/>}/>
         </Route>
         <Route index element={<CreateSong/>}/>
+        <Route path="error" element={<Error />}/>
       </Route>
     </Routes>
   </BrowserRouter>
