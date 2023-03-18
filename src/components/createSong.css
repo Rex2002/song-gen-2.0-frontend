@@ -1,0 +1,54 @@
+.body{
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ef3ed776;
+}
+
+.generate-button-text{
+  font-size: large;
+  font-weight: bold;
+}
+.body-container-left{
+  width: 30%;
+  height: 40vh;
+  float: left;
+}
+.body-container-left-left{
+  width: 80%;
+  height: 40vh;
+  float: left;
+}
+.body-container-left-right{
+  width: 20%;
+  height: 40vh;
+  float: left;
+  align-items: center;
+  justify-content: left;
+  display: flex;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+.body-container-center{
+  width: 40%;
+  height: 100%;
+  float: left;
+}
+.body-container-center-top{
+  height: 50vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.body-container-center-bottom{
+  height: 20vh;
+  font-size: larger;
+}
+
+.body-container-right{ 
+  width: 30%;
+  height: 100%;
+  float: left;
+}
