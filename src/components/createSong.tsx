@@ -1,5 +1,7 @@
 import { Button, Checkbox, Slider } from '@mui/material';
 import React, { ChangeEvent, useState } from 'react';
+import HomeIcon from '@mui/icons-material/Home';
+
 import { useNavigate } from 'react-router-dom';
 import './createSong.css';
 
@@ -20,15 +22,15 @@ const BpmMarks = [
 const GenreMarks = [
   {
     value: 0,
-    label: 'Pop',
+    label: 'POP',
   },
   {
     value: 1,
-    label: 'Blues'
+    label: 'BLUES'
   },
   {
     value: 2,
-    label: 'Random',
+    label: 'RANDOM',
   },
 ];
 
@@ -40,7 +42,7 @@ function CreateSong() {
   const [textIncluded, setTextIncluded] = useState(false)
   const [uploadedFile, setUploadedFile] = useState<File>()
   const navigate = useNavigate()
-
+  const api = process.env.REACT_APP_API_ADDRESS
 
   const onBpmSliderChange = (e: Event, val: number | number[], activeThumb: number) =>{
     if(typeof val == "number"){
@@ -63,20 +65,22 @@ function CreateSong() {
   const displayGenre = (genreNo : number) =>{
     return GenreMarks.filter(el => el.value === genreNo)[0].label
   }
+  const getFileType = (filename: string) =>{
+    var splittedStuff = filename.split(".")
+    return splittedStuff[splittedStuff.length-1]
+  }
 
   const onGenerateSongClick = ()=>{
     const formData = new FormData()
-    formData.set("genre", genre as unknown as string)
+    formData.set("genre", displayGenre(genre))
     formData.set("BPM", BPM as unknown as string)
-    formData.set("textFile", textIncluded && uploadedFile ? uploadedFile : "0")
-    fetch("url", {
+    formData.set("fileType", getFileType(textIncluded && uploadedFile ? uploadedFile.name : ".txt"))
+    formData.set("file", textIncluded && uploadedFile ? uploadedFile : "0")
+    fetch("http://192.168.178.93:8080"+"/api/generate", {
         method: "POST",
-        headers:{
-            'Content-Type': 'application/json'
-        },
         body: formData})
-    .then(res => res.json())
-    .then(data => data.id !== null ? navigate("/viewSong/"+data.id) : navigate("/error"))
+    .then(data => data.text())
+    .then(data => data !== null ? navigate("/viewSong/"+data) : navigate("/error"))
     .catch(err => {console.log(err); return navigate('/error')})
     }
 

@@ -5,6 +5,7 @@ import CreateSong from './components/createSong';
 import Header from './components/header';
 import Error from './components/error'
 import ViewSongs from './components/viewSong';
+import SearchSong from './components/searchSong';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" element={<Header/>}>
         <Route path="viewSong">
           <Route path=":id" element={<ViewSongs/>}/>
+          <Route path="" element={<SearchSong/>}/>
         </Route>
         <Route index element={<CreateSong/>}/>
         <Route path="error" element={<Error />}/>
