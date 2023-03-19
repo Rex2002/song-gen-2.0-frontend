@@ -1,4 +1,4 @@
-import { Button, Checkbox, Slider, Switch } from '@mui/material';
+import { Button, Slider, Switch } from '@mui/material';
 import React, { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import uploadImg from '../res/uploadImg.png'
