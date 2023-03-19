@@ -10,13 +10,11 @@ function ViewSongs(){
     const [ midi, setMidi ] = useState()
     const [status, setStatus] = useState("Loading")
       useEffect(() => {
-      // fetch data from id 
-      console.log("api: " + api)
         console.log("ID: " + id);
-        fetch("https://song-gen-2.fly.dev/api/file/" + id)
+        fetch(api + "/api/file/" + id)
         .then(data => data.blob())
         .then(data => {
-          if(data.size !== 1){
+          if(data.size !== 0){
             setMidi(data)
             setStatus("Success")
           }

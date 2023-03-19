@@ -41,7 +41,7 @@ function CreateSong() {
   const [textIncluded, setTextIncluded] = useState(false)
   const [uploadedFile, setUploadedFile] = useState<File>()
   const navigate = useNavigate()
-  //const api = process.env.REACT_APP_API_ADDRESS
+  const api = process.env.REACT_APP_API_ADDRESS
 
   const onBpmSliderChange = (e: Event, val: number | number[], activeThumb: number) =>{
     if(typeof val == "number"){
@@ -76,7 +76,7 @@ function CreateSong() {
     formData.set("BPM", BPM as unknown as string)
     formData.set("fileType", getFileType(textIncluded && uploadedFile ? uploadedFile.name : ".txt"))
     formData.set("file", textIncluded && uploadedFile ? uploadedFile : "0")
-    fetch("https://song-gen-2.fly.dev/api/generate", {
+    fetch(api + "/api/generate", {
         method: "POST",
         body: formData})
     .then(data => data.text())
