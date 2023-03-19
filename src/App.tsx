@@ -11,7 +11,7 @@ import SearchSong from './components/searchSong';
 function App() {
 
  return (
-  <BrowserRouter>
+  
     <Routes>
       <Route path="/" element={<Header/>}>
         <Route path="viewSong">
@@ -22,7 +22,6 @@ function App() {
         <Route path="error" element={<Error />}/>
       </Route>
     </Routes>
-  </BrowserRouter>
   );
 }
 
