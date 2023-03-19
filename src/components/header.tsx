@@ -9,14 +9,14 @@ function Header(){
     return (
         <div>
         <header className="App-header">
-        <IconButton className="homeIcon-button" onClick={()=> navigate("/")}>
-            <HomeIcon color="secondary" sx={{fontSize: 44, borderRadius: '5px'}}  className='homeIcon-icon'/>
+        <IconButton sx={{borderRadius: '5px'}} className="homeIcon-button" onClick={()=> navigate("/")}>
+            <HomeIcon color="secondary" sx={{fontSize: 50}}  className='homeIcon-icon'/>
           </IconButton>
           <div className='header-text'>
             Song Generator v2
           </div>
-          <IconButton disableRipple className="searchIcon-button" onClick={()=> navigate("/viewSong")}>
-            <SearchIcon color="secondary" sx={{fontSize: 44, borderRadius: '5px'}}  className='searchIcon-icon'/>
+          <IconButton sx={{borderRadius: '5px'}} className="searchIcon-button" onClick={()=> navigate("/viewSong")}>
+            <SearchIcon color="secondary" sx={{fontSize: 50}}  className='searchIcon-icon'/>
           </IconButton>
 
         </header>  

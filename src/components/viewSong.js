@@ -8,6 +8,7 @@ function ViewSongs(){
     const api = process.env.REACT_APP_API_ADDRESS
     const { id } = useParams()
     const [ midi, setMidi ] = useState()
+    const [status, setStatus] = useState("Loading")
       useEffect(() => {
       // fetch data from id 
       console.log("api: " + api)
@@ -15,7 +16,16 @@ function ViewSongs(){
         fetch(api + "/api/file/" + id)
         .then(data => data.blob())
         .then(data => {
-          setMidi(data)
+          if(data.size !== 1){
+            setMidi(data)
+            setStatus("Success")
+          }
+          else{
+            setStatus("Failed")
+          }
+        })
+        .catch(err =>{
+          setStatus("Failed")
         })
       return () => {
       }
@@ -28,13 +38,15 @@ function ViewSongs(){
 
     return (
         <div className="container">
-          <div>
-          <h1>
-            SongId: {id}
-          </h1>
+          <div className="info-area">
+            <h1>
+              {status === "Loading" && <>Loading...</>}
+              {status === "Failed" && <>Song does not exists</>}
+              {status === "Success"&& <>SongId: {id}</>}
+            </h1>
           </div>
           
-            <Button variant='contained' onClick={downloadMidi}>Download Midi File</Button>
+          <Button variant='contained' className="download-button" disabled={status !== "Success"} onClick={downloadMidi}>Download Midi File</Button>
           
         
         </div>

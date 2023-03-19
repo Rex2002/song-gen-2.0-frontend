@@ -1,18 +1,19 @@
 
 .App-header {
     background-color: #282c34;
-    height: 15vh;
-    width: 100%;
+    height: 14vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
     font-size: calc(20px + 2vmin);
     color: white;
     z-index: -1;
   }
 .homeIcon-button{
   width: 10%;
-  border-radius: 5%
+  border-radius: 5px
 }
 .homeIcon-button:hover{
   background-color: lightblue !important;
