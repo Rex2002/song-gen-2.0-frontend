@@ -76,7 +76,7 @@ function CreateSong() {
     formData.set("BPM", BPM as unknown as string)
     formData.set("fileType", getFileType(textIncluded && uploadedFile ? uploadedFile.name : ".txt"))
     formData.set("file", textIncluded && uploadedFile ? uploadedFile : "0")
-    fetch("http://192.168.178.93:8080/api/generate", {
+    fetch("https://song-gen-2.fly.dev/api/generate", {
         method: "POST",
         body: formData})
     .then(data => data.text())

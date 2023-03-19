@@ -13,7 +13,7 @@ function ViewSongs(){
       // fetch data from id 
       console.log("api: " + api)
         console.log("ID: " + id);
-        fetch(api + "/api/file/" + id)
+        fetch("https://song-gen-2.fly.dev/api/file/" + id)
         .then(data => data.blob())
         .then(data => {
           if(data.size !== 1){
