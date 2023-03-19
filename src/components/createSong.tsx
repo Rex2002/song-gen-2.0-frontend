@@ -40,6 +40,7 @@ function CreateSong() {
   const [genre, setGenre] = useState(0)
   const [textIncluded, setTextIncluded] = useState(false)
   const [uploadedFile, setUploadedFile] = useState<File>()
+  const [errorMessage, setErrorMessage] = useState("")
   const navigate = useNavigate()
   const api = process.env.REACT_APP_API_ADDRESS
 
@@ -55,6 +56,9 @@ function CreateSong() {
   }
   const onIncludeTextChange = (e: ChangeEvent<HTMLInputElement>, checked: boolean)=>{
     setTextIncluded(checked)
+    if(!checked){
+      setErrorMessage("")
+    }
   }
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>)=>{
     if(e.target.files){
@@ -72,6 +76,10 @@ function CreateSong() {
   const onGenerateSongClick = ()=>{
     const formData = new FormData()
     var formattedGenre = displayGenre(genre)
+    if (textIncluded){
+      setErrorMessage("Unfortunately text generation is disabled currently, because our backend runs out of memory when parsing text...")
+      return;
+    }
     formData.set("genre", formattedGenre === "RANDOM" ? displayGenre(Math.floor(Math.random() * 2)) : formattedGenre)
     formData.set("BPM", BPM as unknown as string)
     formData.set("fileType", getFileType(textIncluded && uploadedFile ? uploadedFile.name : ".txt"))
@@ -110,7 +118,11 @@ function CreateSong() {
               <p className='generate-button-text'>
                 Generate Song
               </p>
-            </Button>
+              
+            </Button> <br/>
+            <p>
+                {errorMessage}
+              </p>
         </div>
         <div className='body-container-center-bottom'>
           <div className='body-container-center-bottom-top'>
