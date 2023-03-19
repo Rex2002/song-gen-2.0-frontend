@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Error(){
     return (
-        <div >
+        <div>
             <h1 style={{display: 'flex', justifyContent:'center'}}>
                 An error occurred. Please retry.
             </h1>

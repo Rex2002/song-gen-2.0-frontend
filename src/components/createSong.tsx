@@ -1,6 +1,7 @@
-import { Button, Checkbox, Slider } from '@mui/material';
+import { Button, Checkbox, Slider, Switch } from '@mui/material';
 import React, { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import uploadImg from '../res/uploadImg.png'
 import './createSong.css';
 
 function valueToBpmText(value: number){
@@ -35,7 +36,7 @@ const GenreMarks = [
 
 function CreateSong() {
 
-  const [BPM, setBPM] = useState(60)
+  const [BPM, setBPM] = useState(120)
   const [genre, setGenre] = useState(0)
   const [textIncluded, setTextIncluded] = useState(false)
   const [uploadedFile, setUploadedFile] = useState<File>()
@@ -70,7 +71,8 @@ function CreateSong() {
 
   const onGenerateSongClick = ()=>{
     const formData = new FormData()
-    formData.set("genre", displayGenre(genre))
+    var formattedGenre = displayGenre(genre)
+    formData.set("genre", formattedGenre === "RANDOM" ? displayGenre(Math.floor(Math.random() * 2)) : formattedGenre)
     formData.set("BPM", BPM as unknown as string)
     formData.set("fileType", getFileType(textIncluded && uploadedFile ? uploadedFile.name : ".txt"))
     formData.set("file", textIncluded && uploadedFile ? uploadedFile : "0")
@@ -92,7 +94,8 @@ function CreateSong() {
               orientation="vertical"
               getAriaValueText={valueToBpmText}
               valueLabelDisplay="off"
-              defaultValue={120}
+              defaultValue={BPM}
+              track={false}
               max={180}
               min={60}
               marks={BpmMarks}
@@ -110,10 +113,16 @@ function CreateSong() {
             </Button>
         </div>
         <div className='body-container-center-bottom'>
-          Text<br/>
-          <Checkbox onChange={onIncludeTextChange} /><br/>
+          <div className='body-container-center-bottom-top'>
+          Text?<br/>
+          <Switch onChange={onIncludeTextChange} /><br/>
+          </div>
           {textIncluded &&
-          <input type="file" onChange={handleFileChange}/>}
+            <div className="file-upload">
+              <img width="50px" height="50px" src={uploadImg} alt="upload" />
+              <div> {uploadedFile?.name || "Click box to upload"}</div>
+              <input type="file" onChange={handleFileChange} />
+            </div>}
         </div>
         </div>
         <div className='body-container-right'>
@@ -127,8 +136,9 @@ function CreateSong() {
               orientation="vertical"
               getAriaValueText={valueToBpmText}
               valueLabelDisplay="off"
-              defaultValue={0}
+              defaultValue={genre}
               step={1}
+              track={false}
               max={2}
               min={0}
               marks={GenreMarks}

@@ -1,11 +1,3 @@
 .App {
   text-align: center;
 }
-
-.App-body{
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ef3ed776;
-}

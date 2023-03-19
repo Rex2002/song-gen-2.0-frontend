@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 import "./header.css"
 import { IconButton } from "@mui/material";
@@ -20,7 +20,6 @@ function Header(){
           </IconButton>
 
         </header>  
-        <Outlet/>
         </div>
     )
 }

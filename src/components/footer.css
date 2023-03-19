@@ -1,0 +1,37 @@
+
+.App-footer {
+    background-color: #282c34;
+    height: 4vh;
+    position: absolute;
+    bottom: 0px;
+    width: 96%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: calc(20px);
+    color: white;
+    z-index: -1;
+  }
+.footer-credits{
+  width: 30%;
+  text-align: left;
+  border-radius: 5px
+}
+
+.footer-text{
+  width: 40%;
+  text-align: center;
+}
+.icon-source{
+  font-size: small;
+  width: 30%;
+  text-align: right;
+  border-radius: 5px;
+}
+
+a{
+  text-decoration: none;
+  color: blueviolet;
+}
